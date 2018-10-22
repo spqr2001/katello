@@ -25,8 +25,8 @@
 	sudo yum -y update
   	sudo yum -y install katello
 	sudo foreman-installer --scenario katello --foreman-admin-password global --foreman-initial-location Kaiserslautern --foreman-initial-organization Holudeck
-
-
+	sudo hammer activation-key create --name holudeck --lifecycle-environment libary
+	
     	# Set-up firewall
     	sudo firewall-cmd --permanent --add-service=http
    	sudo firewall-cmd --permanent --add-service=https
