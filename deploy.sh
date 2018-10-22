@@ -1,4 +1,4 @@
-!#/bin/bash 
+#!/bin/bash 
 
 # Dependencies 
 vagrant plugin install vagrant-hostmanager
