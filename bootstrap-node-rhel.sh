@@ -18,11 +18,6 @@
     sudo rpm -Uvh http://puppet.local/pub/katello-ca-consumer-latest.noarch.rpm
     sudo yum -y  install katello-agent
     sudo subscription-manager register --org="Holudeck" --activationkey="holudeck"
-    wget http://mirror.centos.org/centos/7/os/x86_64/RPM-GPG-KEY-CentOS-7
-    sudo hammer gpg create  --key RPM-GPG-KEY-CentOS-7 --name "Centos7"  --organization "Holudeck"
-    sudo  hammer repository create --name "Centos7 Base" --content-type "yum" --publish-via-http true --url http://mirror.centos.org/centos/7/os/x86_64/ --gpg-key "Centos7" --product "Centos7" --organization "holudeck"
-    sudo  hammer repository create --name "Centos7 Extra" --content-type "yum" --publish-via-http true --url http://mirror.centos.org/centos/7/extras/x86_64/ --gpg-key "Centos7" --product "Centos7" --organization "holudeck"
-    sudo  hammer repository create --name "Centos7 Updates" --content-type "yum" --publish-via-http true --url http://mirror.centos.org/centos/7/updates/x86_64/ --gpg-key "Centos7" --product "Centos7" --organization "holudeck"
 
     # Services
 

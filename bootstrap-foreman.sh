@@ -26,6 +26,7 @@
   	sudo yum -y install katello
 	sudo foreman-installer --scenario katello --foreman-admin-password global --foreman-initial-location Kaiserslautern --foreman-initial-organization Holudeck
 	sudo hammer activation-key create --name holudeck --organization holudeck --lifecycle-environment libary
+	wget http://mirror.centos.org/centos/7/os/x86_64/RPM-GPG-KEY-CentOS-7
 	sudo hammer gpg create  --key RPM-GPG-KEY-CentOS-7 --name "Centos7"  --organization "Holudeck"
     	sudo  hammer repository create --name "Centos7 Base" --content-type "yum" --publish-via-http true --url http://mirror.centos.org/centos/7/os/x86_64/ --gpg-key "Centos7" --product "Centos7" --organization "holudeck"
         sudo  hammer repository create --name "Centos7 Extra" --content-type "yum" --publish-via-http true --url http://mirror.centos.org/centos/7/extras/x86_64/ --gpg-key "Centos7" --product "Centos7" --organization "holudeck"
