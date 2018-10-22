@@ -16,8 +16,8 @@
     sudo yum -y update 
     sudo yum -y install  subscription-manager
     sudo rpm -Uvh http://puppet.local/pub/katello-ca-consumer-latest.noarch.rpm
-    sudo subscription-manager register --org="Holudeck" --activationkey="Katello"
     sudo yum -y  install katello-agent
+    sudo subscription-manager register --org="Holudeck" --activationkey="holudeck"
 
     # Services
 
