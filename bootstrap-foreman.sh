@@ -41,13 +41,13 @@
 
 	# Import Repos 
 	sudo hammer repository create  --product "el7_repos" --name "base_x86_64" --label "base_x86_64" --content-type "yum" --download-policy "on_demand" \
-		--gpg-key "RPM-GPG-KEY-CentOS-7" --url "http://mirror.centos.org/centos/7/os/x86_64/" --mirror-on-sync "no"
+		--gpg-key "RPM-GPG-KEY-CentOS-7" --url "http://mirror.centos.org/centos/7/os/x86_64/" --mirror-on-sync "no" --organization "holudeck"
 	sudo hammer repository create --product "el7_repos" --name "extras_x86_64" --label "extras_x86_64"  --content-type "yum"  --download-policy "on_demand" \
-	       	--gpg-key "RPM-GPG-KEY-CentOS-7" --url "http://mirror.centos.org/centos/7/extras/x86_64/" --mirror-on-sync "no"
+	       	--gpg-key "RPM-GPG-KEY-CentOS-7" --url "http://mirror.centos.org/centos/7/extras/x86_64/" --mirror-on-sync "no" --organization "holudeck"
 	sudo hammer repository create  --product "el7_repos" --name "updates_x86_64" --label "updates_x86_64" --content-type "yum" --download-policy "on_demand" \
-		--gpg-key "RPM-GPG-KEY-CentOS-7"  --url "http://mirror.centos.org/centos/7/updates/x86_64/" --mirror-on-sync "no"
+		--gpg-key "RPM-GPG-KEY-CentOS-7"  --url "http://mirror.centos.org/centos/7/updates/x86_64/" --mirror-on-sync "no" --organization "holudeck"
 	sudo  hammer repository create  --product "el7_repos"  --name "mysql_57_x86_64"  --label "mysql_57_x86_64" --content-type "yum"  --download-policy "on_demand" \
-	      	--gpg-key "RPM-GPG-KEY-mysql" --url "https://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/"
+	      	--gpg-key "RPM-GPG-KEY-mysql" --url "https://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/" --organization "holudeck"
 
 	# List GPG 
 	sudo hammer gpg list --order ID
@@ -56,19 +56,19 @@
 	sudo hammer repository list --order ID
 
 	# Add CV
-	sudo hammer content-view create --name "el7_content" --description "Content view for CentOS 7"
+	sudo hammer content-view create --name "el7_content" --description "Content view for CentOS 7" --organization "holudeck"
 
 	# Add Repo to CV 
-	for i in $(seq 1 16); do sudo hammer content-view add-repository --name "el7_content" --product "el7_repos" --repository-id "$i";  done
+	for i in $(seq 1 16); do sudo hammer content-view add-repository --name "el7_content" --product "el7_repos" --repository-id "$i" --organization "holudeck";  done
 
 	# Create Livecycle ENV 
-	sudo hammer lifecycle-environment create --name "stable"  --label "stable" --prior "Library"
+	sudo hammer lifecycle-environment create --name "stable"  --label "stable" --prior "Library" --organization "holudeck"
 
 	# Publish new CV 
-	sudo hammer content-view publish --name "el7_content" --description "Publishing repositories"
+	sudo hammer content-view publish --name "el7_content" --description "Publishing repositories" --organization "holudeck"
 
 	# Promote Version 
-	sudo hammer content-view version promote  --content-view "el7_content" --version "1.0" --to-lifecycle-environment "stable"
+	sudo hammer content-view version promote  --content-view "el7_content" --version "1.0" --to-lifecycle-environment "stable" --organization "holudeck"
 
     	# Set-up firewall
     	sudo firewall-cmd --permanent --add-service=http
