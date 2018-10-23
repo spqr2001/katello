@@ -58,6 +58,9 @@
 	# Publish new CV 
 	sudo hammer content-view publish --name "el7_content" --description "Publishing repositories"
 
+	# Promote Version 
+	sudo hammer content-view version promote  --content-view "el7_content" --version "1.0" --to-lifecycle-environment "stable"
+
     	# Set-up firewall
     	sudo firewall-cmd --permanent --add-service=http
    	sudo firewall-cmd --permanent --add-service=https
