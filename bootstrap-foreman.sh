@@ -24,21 +24,26 @@
 	sudo yum -y install foreman-release-scl python-django
 	sudo yum -y update
   	sudo yum -y install katello
+
 	# Katello Installation 
 	sudo foreman-installer --scenario katello --foreman-admin-password global --foreman-initial-location Kaiserslautern --foreman-initial-organization holudeck
+
 	# Kartello Config 
 	sudo hammer product create  --name "el7_repos" --description "Various repositories to use with CentOS 7"
 	sudo hammer activation-key create --name holudeck --organization holudeck 
-	# Centos Repo 
+
+	#  Import Keys 
 	wget http://mirror.centos.org/centos/7/os/x86_64/RPM-GPG-KEY-CentOS-7
-	sudo hammer gpg create  --key RPM-GPG-KEY-CentOS-7 --name "Centos7"  --organization "holudeck"
-	wget https://archive.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7Server
-        sudo hammer gpg create --key "RPM-GPG-KEY-EPEL-7Server"  --name "RPM-GPG-KEY-EPEL-7Server"
+	sudo hammer gpg create  --key "RPM-GPG-KEY-CentOS-7" --name "RPM-GPG-KEY-CentOS-7" --organization "holudeck"
+
+	wget https://archive.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7ServerA
+        sudo hammer gpg create --key "RPM-GPG-KEY-EPEL-7Server"  --name "RPM-GPG-KEY-EPEL-7Server" --organization "holudeck" 
+
+	# Import Repos 
 	sudo hammer repository create  --product "el7_repos" --name "base_x86_64" --label "base_x86_64" --content-type "yum" --download-policy "on_demand" --gpg-key "RPM-GPG-KEY-CentOS-7" --url "http://mirror.centos.org/centos/7/os/x86_64/" --mirror-on-sync "no"
 	sudo hammer repository create --product "el7_repos" --name "extras_x86_64" --label "extras_x86_64"  --content-type "yum"  --download-policy "on_demand" --gpg-key "RPM-GPG-KEY-CentOS-7" --url "http://mirror.centos.org/centos/7/extras/x86_64/" --mirror-on-sync "no"
 	sudo hammer repository create  --product "el7_repos" --name "updates_x86_64" --label "updates_x86_64" --content-type "yum" --download-policy "on_demand" --gpg-key "RPM-GPG-KEY-CentOS-7"  --url "http://mirror.centos.org/centos/7/updates/x86_64/" --mirror-on-sync "no"
 	sudo  hammer repository create  --product "el7_repos"  --name "mysql_57_x86_64"  --label "mysql_57_x86_64" --content-type "yum"  --download-policy "on_demand"  --gpg-key "RPM-GPG-KEY-mysql" --url "https://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/"
-
 
 	# List GPG 
 	sudo hammer gpg list --order ID
