@@ -1,0 +1,28 @@
+#!/bin/bash 
+#
+DIR=/tmp
+CAPACITY_LIMIT=95
+
+CAPACITY=$(df -k . | awk '{gsub("%",""); capacity=$5}; END {print capacity}')
+
+if [ $CAPACITY -gt $CAPACITY_LIMIT ]
+then
+    ls -rt | while read FILE
+    do
+        if [ -f $FILE ]
+        then
+            if rm -f $FILE
+            then
+                echo "Deleted $FILE"
+
+                CAPACITY=$(df -k . | awk '{gsub("%",""); capacity=$5}; END {print capacity}')
+
+                if [ $CAPACITY -le $CAPACITY_LIMIT ]
+                then
+                    # we're below the limit, so stop deleting
+                    exit
+                fi
+            fi
+        fi
+    done
+fi
