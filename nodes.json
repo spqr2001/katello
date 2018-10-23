@@ -1,20 +1,20 @@
 {
   "nodes": {
-    "puppet.local": {
+    "katello.local": {
       ":ip": "192.168.35.5",
       "ports": [],
       ":memory": 9024,
       ":box": "puppetlabs/centos-7.0-64-puppet",
       ":bootstrap": "bootstrap-foreman.sh"
     },
-    "client01.local": {
+    "node01.local": {
       ":ip": "192.168.35.10",
       "ports": [],
       ":memory": 1024,
       ":box": "puppetlabs/centos-7.0-64-puppet",
       ":bootstrap": "bootstrap-node-rhel.sh"
     },
-    "client02.local": {
+    "node02.local": {
       ":ip": "192.168.35.20",
       "ports": [],
       ":memory": 1024,

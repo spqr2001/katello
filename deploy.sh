@@ -6,7 +6,7 @@ vagrant plugin install vagrant-vbguest
 vagrant plugin install vagrant-disksize
 
 # Deploy Nodes 
-vagrant up puppet.local && vagrant up client01.local client02.local 
+vagrant up katello.local && vagrant up node01.local node02.local 
 
 # Add Nodes to puppet.local 
-vagrant ssh puppet.local -c "sudo /opt/puppetlabs/bin/puppet cert sign --all"
+vagrant ssh katello.local -c "sudo /opt/puppetlabs/bin/puppet cert sign --all"
