@@ -46,8 +46,8 @@
 	       	--gpg-key "RPM-GPG-KEY-CentOS-7" --url "http://mirror.centos.org/centos/7/extras/x86_64/" --mirror-on-sync "no" --organization "holudeck"
 	sudo hammer repository create  --product "el7_repos" --name "updates_x86_64" --label "updates_x86_64" --content-type "yum" --download-policy "on_demand" \
 		--gpg-key "RPM-GPG-KEY-CentOS-7"  --url "http://mirror.centos.org/centos/7/updates/x86_64/" --mirror-on-sync "no" --organization "holudeck"
-	sudo  hammer repository create  --product "el7_repos"  --name "mysql_57_x86_64"  --label "mysql_57_x86_64" --content-type "yum"  --download-policy "on_demand" \
-	      	--gpg-key "RPM-GPG-KEY-mysql" --url "https://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/" --organization "holudeck"
+	sudo hammer repository create  --product "el7_repos" --name "epel_x86_64" --label "epel_x86_64"  --content-type "yum" --download-policy "on_demand" \
+  		--gpg-key "RPM-GPG-KEY-EPEL-7Server" --url "https://dl.fedoraproject.org/pub/epel/7Server/x86_64/" --organization "holudeck"
 
 	# List GPG 
 	sudo hammer gpg list --order ID
