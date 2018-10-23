@@ -41,13 +41,22 @@
 
 
 	# List GPG 
-
 	sudo hammer gpg list --order ID
 
 	# List Repo 
-
 	sudo hammer repository list --order ID
 
+	# Add CV
+	sudo hammer content-view create --name "el7_content" --description "Content view for CentOS 7"
+
+	# Add Repo to CV 
+	for i in $(seq 1 16); do sudo hammer content-view add-repository --name "el7_content" --product "el7_repos" --repository-id "$i";  done
+
+	# Create Livecycle ENV 
+	sudo hammer lifecycle-environment create --name "stable"  --label "stable" --prior "Library"
+
+	# Publish new CV 
+	sudo hammer content-view publish --name "el7_content" --description "Publishing repositories"
 
     	# Set-up firewall
     	sudo firewall-cmd --permanent --add-service=http
