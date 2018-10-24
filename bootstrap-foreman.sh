@@ -29,7 +29,9 @@
 	sudo foreman-installer --scenario katello --foreman-admin-password global --foreman-initial-location Kaiserslautern --foreman-initial-organization holudeck
 
 	# Kartello Config 
+	sleep 10 
 	sudo hammer product create  --name "el7_repos" --description "Various repositories to use with CentOS 7" --organization holudeck
+	sleep 10 
 	sudo hammer activation-key create --name holudeck --organization holudeck 
 
 	#  Import Keys 

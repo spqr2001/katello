@@ -15,9 +15,9 @@
     sudo yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     sudo yum -y update 
     sudo yum -y install  subscription-manager
-    sudo rpm -Uvh http://puppet.local/pub/katello-ca-consumer-latest.noarch.rpm
+    sudo rpm -Uvh http://katello.local/pub/katello-ca-consumer-latest.noarch.rpm
     sudo yum -y  install katello-agent
-    sudo subscription-manager register --org="Holudeck" --activationkey="holudeck"
+    sudo subscription-manager register --org="holudeck" --activationkey="holudeck"
 
     # Services
 
@@ -27,7 +27,7 @@
     
     # Puppet Conf 
     echo "" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null && \
-    echo "    server = puppet.local" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null && \
+    echo "    server = katello.local" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null && \
     echo "    runinterval = 120s" | sudo tee --append /etc/puppetlabs/puppet/puppet.conf 2> /dev/null
 
     sudo service puppet restart  
@@ -37,4 +37,4 @@
     # Unless you have Foreman autosign certs, each agent will hang on this step until you manually
     # sign each cert in the Foreman UI (Infrastrucutre -> Smart Proxies -> Certificates -> Sign)
     # Alternative, run manually on each host, after provisioning is complete...
-    #sudo /opt/puppetlabs/bin/puppet agent --test --waitforcert=60
+    sudo /opt/puppetlabs/bin/puppet agent -t
